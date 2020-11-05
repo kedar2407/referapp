@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "90369293283",
+    "firebase_url": "https://refer-and-earn-3baa4.firebaseio.com",
+    "project_id": "refer-and-earn-3baa4",
+    "storage_bucket": "refer-and-earn-3baa4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:90369293283:android:6032329f7d2ff6f421fed6",
+        "android_client_info": {
+          "package_name": "com.example.referandearn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "90369293283-pk4tgrdump5nt64dec5dr9knj5rgqoqf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt6Sdl-3uTi0KxXJbhU536g9x2tsPC68s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "90369293283-pk4tgrdump5nt64dec5dr9knj5rgqoqf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
