@@ -36,8 +36,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button resendCode,intent;
-    TextView verifyMsg;
     FirebaseAuth fAuth;
     String userId,count;
     FirebaseUser user;
@@ -45,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     Query query;
     String email;
     ArrayList<String>arrayList=new ArrayList<>();
-    ArrayAdapter arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +70,11 @@ public class MainActivity extends AppCompatActivity {
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    arrayList.clear();
                     email=""+snapshot.child("email").getValue();
                     Toast.makeText(MainActivity.this, email, Toast.LENGTH_LONG).show();
 
-                    arrayList.add("Your username: " + email);
-                    arrayAdapter.notifyDataSetChanged();                }
+
+                                   }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
@@ -119,6 +115,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         ImageButton generate = findViewById(R.id.sharebtn);
+        ImageButton logout = findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fAuth.signOut();
+                startActivity(new Intent(MainActivity.this,Login.class));
+            }
+        });
 
 
 
