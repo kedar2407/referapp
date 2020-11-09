@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     Query query;
     String email;
     ArrayList<String>arrayList=new ArrayList<>();
-
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         count=String.valueOf(Register.count);
         user = fAuth.getCurrentUser();
+        recyclerView=findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         userId=user.getEmail().replace(".","dot");
 
@@ -61,10 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
             FirebaseRecyclerOptions<model> options =
                     new FirebaseRecyclerOptions.Builder<model>()
-                            .setQuery(FirebaseDatabase.getInstance().getReference().child("refusers").child("kedar456@gmaildotcom")
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("refusers").child("kedar687@gmaildotcom")
                                     , model.class)
                             .build();
 
+myadapter myadapter=new myadapter(options);
+recyclerView.setAdapter(myadapter);
 
             databaseReference= FirebaseDatabase.getInstance().getReference("refusers").child("kedar76@gmaildotcom");
             databaseReference.addValueEventListener(new ValueEventListener() {
