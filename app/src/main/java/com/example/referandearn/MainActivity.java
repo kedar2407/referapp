@@ -43,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser user;
     DatabaseReference databaseReference;
     Query query;
-    String email;
-    ArrayList<String>arrayList=new ArrayList<>();
+    String email;ListView listview;
+    ArrayList<String> list=new ArrayList<>();
     RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,28 +57,37 @@ public class MainActivity extends AppCompatActivity {
         user = fAuth.getCurrentUser();
         recyclerView=findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         userId=user.getEmail().replace(".","dot");
 
 
+        listview=(ListView)findViewById(R.id.listview);
+
+        final ArrayAdapter<String> adapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,list);
+        email=fAuth.getCurrentUser().getEmail().replace(".","dot");
 
 
-            FirebaseRecyclerOptions<model> options =
+
+
+        FirebaseRecyclerOptions<model> options =
                     new FirebaseRecyclerOptions.Builder<model>()
-                            .setQuery(FirebaseDatabase.getInstance().getReference().child("refusers").child("kedar687@gmaildotcom")
+                            .setQuery(FirebaseDatabase.getInstance().getReference().child("refusers").child(email)
                                     , model.class)
                             .build();
 
 myadapter myadapter=new myadapter(options);
 recyclerView.setAdapter(myadapter);
 
-            databaseReference= FirebaseDatabase.getInstance().getReference("refusers").child("kedar76@gmaildotcom");
+            databaseReference= FirebaseDatabase.getInstance().getReference("refusers").child(email);
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    email=""+snapshot.child("email").getValue();
-                    Toast.makeText(MainActivity.this, email, Toast.LENGTH_LONG).show();
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    Toast.makeText(MainActivity.this, email, Toast.LENGTH_LONG).show();
 
+//                    list.add(dataSnapshot.getValue().toString());
+                    list.add(String.valueOf(dataSnapshot.getValue()));
+
+                    listview.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
 
                                    }
 
@@ -96,8 +105,8 @@ recyclerView.setAdapter(myadapter);
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
                 }
+
             });
 
 
